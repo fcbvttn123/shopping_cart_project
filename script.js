@@ -1,25 +1,3 @@
-// click event for "add to cart" button
-
-    // if cart is empty 
-
-        // cart icon pops up 
-
-        // indicator showing how many items
-    
-    // if cart is not empty 
-
-        // add item into cart detail 
-
-        // multiple click events for one "add to cart" button
-
-            // if cart item is already in cart detail 
-            
-                // increment number of item 
-
-                // recalculate price and total
-
-//----------------------------------------------------------------------------------------
-
 let btnAddToCart = document.querySelectorAll(".btn-add-to-cart")
 
 let cart = JSON.parse(localStorage.getItem("APP_Shopping_cart")) || [] 
@@ -30,11 +8,12 @@ let cartIcon = document.querySelector(".cart-icon")
 
 let cartIconIndicator = document.querySelector(".cart-icon div")
 
+
+
+
 showCartIcon()
 
 getItems()
-
-    // get items from json file 
 
 async function getItems() {
 
@@ -43,8 +22,6 @@ async function getItems() {
     let data = await res.json()
 
     items = data
-
-        // add click event to buttons 
 
     btnAddToCart.forEach(btn => {
 
@@ -100,13 +77,32 @@ async function getItems() {
 
 }
 
+cartIcon.addEventListener("click", e => {
+
+    cartIcon.classList.toggle("showCartDetail")
+
+    if(!cartIcon.classList.contains("showCartDetail")) {
+
+        cartDetail.classList.add("invisible")
+
+    } else {
+
+        cartDetail.classList.remove("invisible")
+
+        cartDetail.querySelector("div").classList.remove("invisible")
+
+    }
+
+})
+
+
+
+
 function showCartIcon() {
 
     if(cart.length != 0) {
 
         cartIcon.classList.remove("invisible")
-
-        // add item number 
 
         let s = 0;
 
@@ -193,28 +189,3 @@ function deleteCartItem(e) {
     showCartIcon()
 
 }
-
-
-//----------------------------------------------------------------------------------------
-
-// click event for "cart" icon
-
-    // cart details pops up 
-
-cartIcon.addEventListener("click", e => {
-
-    cartIcon.classList.toggle("showCartDetail")
-
-    if(!cartIcon.classList.contains("showCartDetail")) {
-
-        cartDetail.classList.add("invisible")
-
-    } else {
-
-        cartDetail.classList.remove("invisible")
-
-        cartDetail.querySelector("div").classList.remove("invisible")
-
-    }
-
-})
